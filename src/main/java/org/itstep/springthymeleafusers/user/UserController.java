@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class UserController {
@@ -37,5 +38,13 @@ public class UserController {
     public String listUsers(Model model) {
         model.addAttribute("users", userService.findAll());
         return "users";
+    }
+
+    @GetMapping(value ="/edit_user")
+    public String editSmart(Model model, @RequestParam(name="id")Long id) {
+        User user = userService.findById(id);
+        model.addAttribute("user",user);
+        model.addAttribute("roles",roleService.findAll());
+        return "edit_user";
     }
     }
