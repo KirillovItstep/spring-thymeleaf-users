@@ -13,7 +13,7 @@ import java.util.Set;
 public class User {
 
     @Id
-    @Column(name = "user_id")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -24,7 +24,7 @@ public class User {
     private String lastName;
     private boolean enabled;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -36,5 +36,5 @@ public class User {
         return id;
     }
 
-    // remaining getters and setters are not shown for brevity
+    // ADMIN, GUEST, USER, CREATOR, EDITOR
 }
